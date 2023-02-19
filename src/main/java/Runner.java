@@ -3,6 +3,7 @@ import flight.reservation.flight.Schedule;
 import flight.reservation.flight.Flight;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerDrone;
+import flight.reservation.plane.PassengerPlaneFactory;
 import flight.reservation.plane.PassengerPlane;
 
 import java.util.Arrays;
@@ -21,10 +22,10 @@ public class Runner {
     );
 
     static List<Object> aircrafts = Arrays.asList(
-            new PassengerPlane("A380"),
-            new PassengerPlane("A350"),
-            new PassengerPlane("Embraer 190"),
-            new PassengerPlane("Antonov AN2"),
+            (PassengerPlane) new PassengerPlaneFactory().getPlaneType("A30"),
+            new PassengerPlaneFactory().getPlaneType("A350"),
+            new PassengerPlaneFactory().getPlaneType("Embraer 190"),
+            new PassengerPlaneFactory().getPlaneType("Antonov AN2"),
             new Helicopter("H1"),
             new PassengerDrone("HypaHype")
     );

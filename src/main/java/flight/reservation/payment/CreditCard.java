@@ -3,7 +3,7 @@ package flight.reservation.payment;
 import java.util.Date;
 
 /**
- * Dummy credit card class.
+ *  credit card class. This becomes the DTO
  */
 public class CreditCard {
     private double amount;
@@ -26,6 +26,17 @@ public class CreditCard {
 
     public double getAmount() {
         return amount;
+    }
+
+    //Added the following three get methods for Credit Card Strategy to get these values
+    public String getCCNumber() {
+        return this.number;
+    }
+    public Date getExpireDate() {
+        return date;
+    }
+    public String getCVV() {
+        return this.cvv;
     }
 
     public boolean isValid() {

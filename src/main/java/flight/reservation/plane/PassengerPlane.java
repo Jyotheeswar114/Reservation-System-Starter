@@ -1,33 +1,22 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
 
-    public String model;
-    public int passengerCapacity;
-    public int crewCapacity;
+//Code to interface. This could be abstract class or interface.
+// Prefer interface and add any functions that needs to implemented by the implementing class
+ public interface  PassengerPlane {
+   public int passengerCapacity=0;
+   public int crewCapacity=0;
 
-    public PassengerPlane(String model) {
-        this.model = model;
-        switch (model) {
-            case "A380":
-                passengerCapacity = 500;
-                crewCapacity = 42;
-                break;
-            case "A350":
-                passengerCapacity = 320;
-                crewCapacity = 40;
-                break;
-            case "Embraer 190":
-                passengerCapacity = 25;
-                crewCapacity = 5;
-                break;
-            case "Antonov AN2":
-                passengerCapacity = 15;
-                crewCapacity = 3;
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
-        }
-    }
+   public int air_hostesses_required=0;
+
+   public String model=null;
+
+
 
 }
+
+
+
+
+
+
