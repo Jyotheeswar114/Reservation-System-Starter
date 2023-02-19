@@ -7,6 +7,8 @@ import flight.reservation.payment.Paypal;
 import flight.reservation.payment.PaymentStrategy;
 import flight.reservation.payment.CreditCardStrategy;
 import flight.reservation.payment.PaypalStrategy;
+import flight.reservation.payment.WalletAdapter;
+import flight.reservation.payment.MyWallet;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +86,21 @@ public class FlightOrder extends Order {
       //  boolean isPaid = payWithPayPal(email, password, this.getPrice());
         //Instead use the Strategy for paying fva Paypal   here
         boolean isPaid = pay(new PaypalStrategy(email, password));
+
+        if (isPaid) {
+            this.setClosed();
+        }
+        return isPaid;
+    }
+
+    public boolean processWithWallet() throws IllegalStateException {
+        if (isClosed()) {
+            // Payment is already proceeded
+            return true;
+        }
+        //  boolean isPaid = payWithPayPal(email, password, this.getPrice());
+        //Instead use the Strategy for paying fva Paypal   here
+        boolean isPaid = pay(new WalletAdapter( new MyWallet()));
 
         if (isPaid) {
             this.setClosed();
