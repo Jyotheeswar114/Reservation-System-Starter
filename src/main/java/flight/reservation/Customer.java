@@ -21,35 +21,42 @@ public class Customer {
     }
 
     public FlightOrder createOrder(List<String> passengerNames, List<ScheduledFlight> flights, double price) {
-        if (!isOrderValid(passengerNames, flights)) {
-            throw new IllegalStateException("Order is not valid");
-        }
-        FlightOrder order = new FlightOrder(flights);
-        order.setCustomer(this);
-        order.setPrice(price);
-        List<Passenger> passengers = passengerNames
-                .stream()
-                .map(Passenger::new)
-                .collect(Collectors.toList());
-        order.setPassengers(passengers);
-        order.getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(passengers));
-        orders.add(order);
-        return order;
+        MakeReservationCommand make = new CancelReservationCommand(passengerNames, flights, price);
+        make.execute();
+        // if (!isOrderValid(passengerNames, flights)) {
+        //     throw new IllegalStateException("Order is not valid");
+        // }
+        // FlightOrder order = new FlightOrder(flights);
+        // order.setCustomer(this);
+        // order.setPrice(price);
+        // List<Passenger> passengers = passengerNames
+        //         .stream()
+        //         .map(Passenger::new)
+        //         .collect(Collectors.toList());
+        // order.setPassengers(passengers);
+        // order.getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(passengers));
+        // orders.add(order);
+        // return order;
     }
+// all this code goes make reservation command
+    // private boolean isOrderValid(List<String> passengerNames, List<ScheduledFlight> flights) {
+    //     boolean valid = true;
+    //     valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
+    //     valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
+    //     valid = valid && flights.stream().allMatch(scheduledFlight -> {
+    //         try {
+    //             return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
+    //         } catch (NoSuchFieldException e) {
+    //             e.printStackTrace();
+    //             return false;
+    //         }
+    //     });
+    //     return valid;
+    // }
 
-    private boolean isOrderValid(List<String> passengerNames, List<ScheduledFlight> flights) {
-        boolean valid = true;
-        valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
-        valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
-        valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
-        });
-        return valid;
+    public boolean cancelOrder(FlightOrder flightOrder){
+        CancelReservationCommand cancel = new CancelReservationCommand(flightOrder);
+        cancel.execute();
     }
 
     public String getEmail() {
