@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduledFlight extends Flight {
+public class ScheduledFlight extends Flight implements NotifierInterface{
 
     private final List<Passenger> passengers;
+    private final List<Staff> crew;
     private final Date departureTime;
     private double currentPrice = 100;
 
@@ -20,6 +21,15 @@ public class ScheduledFlight extends Flight {
         super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
+    }
+
+    public void notify(String message) {
+        for(Passenger p: passengers){
+            p.update(message);
+        }
+        for(Staff s: crew){
+            s.update(message);
+        }
     }
 
     public ScheduledFlight(int number, Airport departure, Airport arrival, Object aircraft, Date departureTime, double currentPrice) {
