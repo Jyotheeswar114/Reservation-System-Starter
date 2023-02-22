@@ -21,7 +21,7 @@ public class Customer {
     }
 
     public FlightOrder createOrder(List<String> passengerNames, List<ScheduledFlight> flights, double price) {
-        MakeReservationCommand make = new CancelReservationCommand(passengerNames, flights, price);
+        MakeReservationCommand make = new MakeReservationCommand(passengerNames, flights, price);
         make.execute();
         // if (!isOrderValid(passengerNames, flights)) {
         //     throw new IllegalStateException("Order is not valid");
