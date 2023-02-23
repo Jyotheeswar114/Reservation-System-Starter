@@ -1,7 +1,7 @@
 package flight.reservation;
 
 public class State implements FlightComposite{
-    public Airport[] airports;
+    public FlightComposite[] airports;
 
     public int getScheduledFlightCrewCapacity(){
         int s = 0;
