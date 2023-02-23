@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduledFlight extends Flight implements NotifierInterface{
+public class ScheduledFlight extends Flight implements NotifierInterface, FlightComposite {
 
     private final List<Passenger> passengers;
     private final List<Staff> crew;
@@ -21,6 +21,10 @@ public class ScheduledFlight extends Flight implements NotifierInterface{
         super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
+    }
+
+    public getScheduledFlightCrewCapacity() {
+        return crew.size();
     }
 
     public void notify(String message) {
